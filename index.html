@@ -1,5 +1,5 @@
 <html>
-<canvas id="canvas" width="2778" height="1284"></canvas>
+
 
 <head>
   <meta charset="UTF-8">
@@ -13,10 +13,9 @@
     <input id="userInput1" type="Text" placeholder="Unit name">
     <input id="userInput2" type="Text" placeholder="Contigent">
     <button onclick="returnText()">Generate</button>
-   <input type="button" id="downloadBtn" value="Download">
 
 </body>
-
+<canvas id="canvas" width="2778" height="1284"></canvas>
 <script>
 function addTextToImage(imagePath, text, text1, text2) {
     var circle_canvas = document.getElementById("canvas");
@@ -28,8 +27,8 @@ function addTextToImage(imagePath, text, text1, text2) {
     img.onload = function () {
         context.drawImage(img, 0, 0);
         context.lineWidth = 1;
-        context.fillStyle = "#CC00FF";
-        context.lineStyle = "#ffff00";
+        context.fillStyle = "#0CD2CAF";
+        context.lineStyle = "#0CD2CA";
         context.font = "100px sans-serif";
         context.fillText(text, 200, 500);
         context.fillText(text1, 200, 600);
@@ -44,6 +43,8 @@ function returnText(){
     let input2 = document.getElementById("userInput2").value;
     let input02 = input2+' Contigent';
 addTextToImage("https://img.gadgethacks.com/img/original/44/48/63782346628837/0/637823466288374448.jpg", input01, input1, input02);
+
+
 var canvas = document.getElementById("canvas");
   image = canvas.toDataURL("image/png", 1.0).replace("image/png", "image/octet-stream");
   var link = document.createElement('a');
