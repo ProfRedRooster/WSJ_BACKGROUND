@@ -1,0 +1,58 @@
+<html>
+  <canvas id="canvas" width="2778" height="1284"></canvas>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+</head>
+<body>
+
+    <input id="userInput" type="Text" placeholder="Unit number">
+    <input id="userInput1" type="Text" placeholder="Unit name">
+    <input id="userInput2" type="Text" placeholder="Contigent">
+    <button onclick="returnText()">Generate</button>
+    <a id="download" download="triangle.png">
+<button type="button" onClick="download()">Download</button>
+</a>
+
+</body>
+<script>
+  function addTextToImage(imagePath, text, text1, text2) {
+    var circle_canvas = document.getElementById("canvas");
+    var context = circle_canvas.getContext("2d");
+
+    // Draw Image function
+    var img = new Image();
+    img.src = imagePath;
+    img.onload = function () {
+        context.drawImage(img, 0, 0);
+        context.lineWidth = 1;
+        context.fillStyle = "#CC00FF";
+        context.lineStyle = "#ffff00";
+        context.font = "100px sans-serif";
+        context.fillText(text, 200, 500);
+        context.fillText(text1, 200, 600);
+        context.fillText(text2, 200, 700);
+    };
+}
+
+function returnText(){
+    let input = document.getElementById("userInput").value;
+    let input01 = 'Unit '+input;
+    let input1 = document.getElementById("userInput1").value;
+    let input2 = document.getElementById("userInput2").value;
+    let input02 = input2+' Contigent';
+addTextToImage("https://img.gadgethacks.com/img/original/44/48/63782346628837/0/637823466288374448.jpg", input01, input1, input02);
+
+}
+function download() {
+var download = document.getElementById("download");
+var image = document.getElementById("canvas").toDataURL("image/png")
+    .replace("image/png", "image/octet-stream");
+download.setAttribute("href", image);
+//download.setAttribute("download","archive.png");
+}
+  </script>
+</html>
