@@ -44,27 +44,13 @@ function returnText(){
     let input2 = document.getElementById("userInput2").value;
     let input02 = input2+' Contigent';
 addTextToImage("https://img.gadgethacks.com/img/original/44/48/63782346628837/0/637823466288374448.jpg", input01, input1, input02);
-
+var canvas = document.getElementById("canvas");
+  image = canvas.toDataURL("image/png", 1.0).replace("image/png", "image/octet-stream");
+  var link = document.createElement('a');
+  link.download = "my_wsj_background.png";
+  link.href = image;
+  link.click();
 }
-function downloadImage() {
-
-    // Grab the canvas element
-    let canvas = document.getElementById("canvas");
-
-    /* Create a PNG image of the pixels drawn on the canvas using the toDataURL method. PNG is the preferred format since it is supported by all browsers
-    */
-    var dataURL = canvas.toDataURL("image/png");
-
-    // Create a dummy link text
-    var a = document.createElement('a');
-    // Set the link to the image so that when clicked, the image begins downloading
-    a.href = dataURL
-    // Specify the image filename
-    a.download = 'canvas-download.jpeg';
-    // Click on the link to set off download
-    a.click();
-}
-let download = document.getElementById('downloadBtn')
-download.addEventListener('click', downloadImage)
+  
   </script>
 </html>
