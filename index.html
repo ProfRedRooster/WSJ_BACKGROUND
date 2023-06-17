@@ -1,57 +1,77 @@
+<!DOCTYPE html>
 <html>
-
-
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Wallpaper Generator</title>
+    <style>
+        body {
+            text-align: center;
+        }
 
+        #image-preview {
+            width: 500px;
+            height: 500px;
+            background-size: cover;
+            margin: 20px auto;
+        }
+
+        .text-input {
+            margin-bottom: 10px;
+        }
+
+        #download-button {
+            margin-top: 20px;
+        }
+    </style>
 </head>
 <body>
+    <h1>Wallpaper Generator</h1>
+    <div>
+        <label for="text1">Text 1:</label>
+        <input class="text-input" type="text" id="text1" placeholder="Enter text 1">
+    </div>
+    <div>
+        <label for="text2">Text 2:</label>
+        <input class="text-input" type="text" id="text2" placeholder="Enter text 2">
+    </div>
+    <div>
+        <label for="text3">Text 3:</label>
+        <input class="text-input" type="text" id="text3" placeholder="Enter text 3">
+    </div>
+    <div>
+        <button id="generate-button">Generate Wallpaper</button>
+    </div>
+    <div>
+        <a href="#" id="download-button" download>Download Wallpaper</a>
+    </div>
 
-    <input id="userInput" type="Text" placeholder="Unit number">
-    <input id="userInput1" type="Text" placeholder="Unit name">
-    <input id="userInput2" type="Text" placeholder="Contigent">
-    <button onclick="returnText()">Generate</button>
+    <script>
+        document.getElementById('generate-button').addEventListener('click', function() {
+            var text1 = document.getElementById('text1').value;
+            var text2 = document.getElementById('text2').value;
+            var text3 = document.getElementById('text3').value;
 
+            var canvas = document.createElement('canvas');
+            canvas.width = 500;
+            canvas.height = 500;
+            var ctx = canvas.getContext('2d');
+
+            var img = new Image();
+            img.src = '1.jpg';
+            img.onload = function() {
+                ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+                ctx.font = 'bold 30px Arial';
+                ctx.fillStyle = 'white';
+                ctx.textAlign = 'center';
+
+                ctx.fillText(text1, canvas.width / 2, canvas.height / 2 - 40);
+                ctx.fillText(text2, canvas.width / 2, canvas.height / 2);
+                ctx.fillText(text3, canvas.width / 2, canvas.height / 2 + 40);
+
+                var dataURL = canvas.toDataURL('image/png');
+                document.getElementById('image-preview').src = dataURL;
+                document.getElementById('download-button').href = dataURL;
+            };
+        });
+    </script>
 </body>
-<canvas id="canvas" width="2778" height="1284"></canvas>
-<script>
-function addTextToImage(imagePath, text, text1, text2) {
-    var circle_canvas = document.getElementById("canvas");
-    var context = circle_canvas.getContext("2d");
-
-    // Draw Image function
-    var img = new Image();
-    img.src = imagePath;
-    img.onload = function () {
-        context.drawImage(img, 0, 0);
-        context.lineWidth = 1;
-        context.fillStyle = "#0CD2CAF";
-        context.lineStyle = "#0CD2CA";
-        context.font = "100px sans-serif";
-        context.fillText(text, 200, 500);
-        context.fillText(text1, 200, 600);
-        context.fillText(text2, 200, 700);
-    };
-}
-
-function returnText(){
-    let input = document.getElementById("userInput").value;
-    let input01 = 'Unit '+input;
-    let input1 = document.getElementById("userInput1").value;
-    let input2 = document.getElementById("userInput2").value;
-    let input02 = input2+' Contigent';
-addTextToImage("https://img.gadgethacks.com/img/original/44/48/63782346628837/0/637823466288374448.jpg", input01, input1, input02);
-
-
-var canvas = document.getElementById("canvas");
-  image = canvas.toDataURL("image/png", 1.0).replace("image/png", "image/octet-stream");
-  var link = document.createElement('a');
-  link.download = "my_wsj_background.png";
-  link.href = image;
-  link.click();
-}
-  
-  </script>
 </html>
