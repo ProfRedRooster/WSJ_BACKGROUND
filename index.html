@@ -1,5 +1,5 @@
 <html>
-  <canvas id="canvas" width="2778" height="1284"></canvas>
+<canvas id="canvas" width="2778" height="1284"></canvas>
 
 <head>
   <meta charset="UTF-8">
@@ -13,13 +13,12 @@
     <input id="userInput1" type="Text" placeholder="Unit name">
     <input id="userInput2" type="Text" placeholder="Contigent">
     <button onclick="returnText()">Generate</button>
-    <a id="download" download="triangle.png">
-<button type="button" onClick="download()">Download</button>
-</a>
+   <input type="button" id="downloadBtn" value="Download">
 
 </body>
+
 <script>
-  function addTextToImage(imagePath, text, text1, text2) {
+function addTextToImage(imagePath, text, text1, text2) {
     var circle_canvas = document.getElementById("canvas");
     var context = circle_canvas.getContext("2d");
 
@@ -47,12 +46,25 @@ function returnText(){
 addTextToImage("https://img.gadgethacks.com/img/original/44/48/63782346628837/0/637823466288374448.jpg", input01, input1, input02);
 
 }
-function download() {
-var download = document.getElementById("download");
-var image = document.getElementById("canvas").toDataURL("image/png")
-    .replace("image/png", "image/octet-stream");
-download.setAttribute("href", image);
-//download.setAttribute("download","archive.png");
+function downloadImage() {
+
+    // Grab the canvas element
+    let canvas = document.getElementById("canvas");
+
+    /* Create a PNG image of the pixels drawn on the canvas using the toDataURL method. PNG is the preferred format since it is supported by all browsers
+    */
+    var dataURL = canvas.toDataURL("image/png");
+
+    // Create a dummy link text
+    var a = document.createElement('a');
+    // Set the link to the image so that when clicked, the image begins downloading
+    a.href = dataURL
+    // Specify the image filename
+    a.download = 'canvas-download.jpeg';
+    // Click on the link to set off download
+    a.click();
 }
+let download = document.getElementById('downloadBtn')
+download.addEventListener('click', downloadImage)
   </script>
 </html>
